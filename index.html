@@ -1,47 +1,109 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="The home page for sedzinfo.github.io.">
-    <title>sedzinfo.github.io</title>
-    <style>
-      :root {
-        color-scheme: light;
-        font-family: system-ui, sans-serif;
-        color: #172033;
-        background: #f4f6fb;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sedzinfo</title>
+  <meta name="description" content="R packages, applications and tutorials by sedzinfo.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; }
+    .site-card { color: inherit; text-decoration: none; border-left: 5px solid #007ACC; transition: box-shadow .15s, transform .15s; }
+    .site-card:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.12); transform: translateY(-2px); }
+    .site-card .card-title { color: var(--bs-primary); }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="./">sedzinfo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav me-auto" id="nav-links">
+          <li class="nav-item"><a class="nav-link" href="vignettes/">Vignettes</a></li>
+          <li class="nav-item"><a class="nav-link" href="rwf/">rwf</a></li>
+          <li class="nav-item"><a class="nav-link" href="worldbankmodular/">worldbankmodular</a></li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="https://github.com/sedzinfo" aria-label="GitHub"><i class="bi bi-github"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-      body {
-        display: grid;
-        min-height: 100vh;
-        margin: 0;
-        place-items: center;
-      }
+  <main class="container py-5">
+    <h1 class="mb-2">sedzinfo</h1>
+    <p class="lead text-muted mb-4">R packages, applications and tutorials.</p>
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="cards">
+      <div class="col" data-repo="vignettes">
+        <a class="card h-100 site-card" href="vignettes/">
+          <div class="card-body">
+            <h2 class="card-title h5">Vignettes</h2>
+            <p class="card-text">Tutorials and worked examples in R: adaptive testing with EAP scoring, data visualisation, machine learning, psychometrics and scale validation.</p>
+          </div>
+          <div class="card-footer text-muted small">Quarto websites</div>
+        </a>
+      </div>
+      <div class="col" data-repo="rwf">
+        <a class="card h-100 site-card" href="rwf/">
+          <div class="card-body">
+            <h2 class="card-title h5">rwf</h2>
+            <p class="card-text">R package for statistical reporting and visualisation of common methods in psychology: ANOVA, regression, t-tests, CFA, IRT and Thurstonian models.</p>
+          </div>
+          <div class="card-footer text-muted small">R package</div>
+        </a>
+      </div>
+      <div class="col" data-repo="worldbankmodular">
+        <a class="card h-100 site-card" href="worldbankmodular/">
+          <div class="card-body">
+            <h2 class="card-title h5">worldbankmodular</h2>
+            <p class="card-text">Shiny application for exploring World Bank development indicators: country and indicator comparisons, population pyramids, ranked bars, correlations and maps.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny application</div>
+        </a>
+      </div>
+    </div>
+  </main>
 
-      main {
-        padding: 2rem;
-        text-align: center;
-      }
+  <footer class="border-top py-3 text-center text-muted small">
+    <a class="text-muted" href="https://github.com/sedzinfo">github.com/sedzinfo</a>
+  </footer>
 
-      h1 {
-        margin: 0;
-        font-size: clamp(2rem, 8vw, 4rem);
-        letter-spacing: -0.06em;
-      }
-
-      p {
-        margin: 1rem 0 0;
-        color: #536078;
-        font-size: 1.125rem;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Welcome</h1>
-      <p>sedzinfo.github.io</p>
-    </main>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Add a card for any other repository published with GitHub Pages (the cards above stay if this fails)
+    fetch("https://api.github.com/users/sedzinfo/repos?per_page=100")
+      .then(r => r.ok ? r.json() : [])
+      .then(repos => {
+        const cards = document.getElementById("cards");
+        const nav = document.getElementById("nav-links");
+        const shown = new Set([...cards.querySelectorAll("[data-repo]")].map(el => el.dataset.repo));
+        repos
+          .filter(r => r.has_pages && !r.fork && !r.archived && r.name !== "sedzinfo.github.io" && !shown.has(r.name))
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .forEach(r => {
+            const col = document.createElement("div");
+            col.className = "col";
+            col.dataset.repo = r.name;
+            col.innerHTML = '<a class="card h-100 site-card"><div class="card-body"><h2 class="card-title h5"></h2><p class="card-text"></p></div><div class="card-footer text-muted small"></div></a>';
+            col.querySelector("a").href = r.name + "/";
+            col.querySelector("h2").textContent = r.name;
+            col.querySelector("p").textContent = r.description || "";
+            col.querySelector(".card-footer").textContent = r.language || "";
+            cards.appendChild(col);
+            const li = document.createElement("li");
+            li.className = "nav-item";
+            li.innerHTML = '<a class="nav-link"></a>';
+            li.querySelector("a").href = r.name + "/";
+            li.querySelector("a").textContent = r.name;
+            nav.appendChild(li);
+          });
+      })
+      .catch(() => {});
+  </script>
+</body>
 </html>
