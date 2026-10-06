@@ -13,6 +13,10 @@
     .site-card { color: inherit; text-decoration: none; border-left: 5px solid #007ACC; transition: box-shadow .15s, transform .15s; }
     .site-card:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.12); transform: translateY(-2px); }
     .site-card .card-title { color: var(--bs-primary); }
+    .dash-card { border-left-color: #F46800; }
+    .live-dot { display: inline-block; width: .6em; height: .6em; border-radius: 50%; background: #18BC9C; animation: pulse 1.6s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(24,188,156,.6); } 100% { box-shadow: 0 0 0 .6em rgba(24,188,156,0); } }
+    @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
   </style>
 </head>
 <body>
@@ -27,6 +31,10 @@
           <li class="nav-item"><a class="nav-link" href="vignettes/">vignettes</a></li>
           <li class="nav-item"><a class="nav-link" href="rwf/">rwf</a></li>
           <li class="nav-item"><a class="nav-link" href="worldbankmodular/">worldbankmodular</a></li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#apps">apps</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dashboards">dashboards</a></li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="https://github.com/sedzinfo" aria-label="GitHub"><i class="bi bi-github"></i></a></li>
@@ -64,6 +72,97 @@
             <p class="card-text">Shiny application for exploring World Bank development indicators: country and indicator comparisons, population pyramids, ranked bars, correlations and maps.</p>
           </div>
           <div class="card-footer text-muted small">Shiny application</div>
+        </a>
+      </div>
+    </div>
+
+    <h2 class="h4 mt-5 mb-1" id="apps">Apps</h2>
+    <p class="text-muted small mb-4"><i class="bi bi-hourglass-split"></i> Hosted on shinyapps.io, so an app may take a few seconds to wake up.</p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col">
+        <a class="card h-100 site-card" href="https://dimitrios.shinyapps.io/modelsirt/" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-graph-up"></i> IRT models</h3>
+            <p class="card-text">Explore item response theory models and how their parameters shape item and test curves.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny app · psychometrics</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card" href="https://dimitrios.shinyapps.io/mleirt/" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-bullseye"></i> MLE in IRT</h3>
+            <p class="card-text">See how maximum likelihood estimates ability from a pattern of item responses.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny app · psychometrics</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card" href="https://dimitrios.shinyapps.io/worldbank/" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-globe-americas"></i> World Bank</h3>
+            <p class="card-text">Browse and compare World Bank development indicators across countries and years.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny app · open data</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card" href="https://dimitrios.shinyapps.io/crypto_timeseries/" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-currency-bitcoin"></i> Crypto time series</h3>
+            <p class="card-text">Plot and explore cryptocurrency prices over time.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny app · time series</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card" href="https://sedzinfo.shinyapps.io/covid_timeseries/" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-virus"></i> COVID-19 time series</h3>
+            <p class="card-text">Follow COVID-19 cases and deaths over time by country.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny app · time series</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card" href="https://sedzinfo.shinyapps.io/pimoroni_enviro/" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-thermometer-half"></i> Pimoroni Enviro</h3>
+            <p class="card-text">Readings from a Pimoroni Enviro sensor board: temperature, humidity, pressure and more.</p>
+          </div>
+          <div class="card-footer text-muted small">Shiny app · sensors</div>
+        </a>
+      </div>
+    </div>
+
+    <h2 class="h4 mt-5 mb-1" id="dashboards">Live dashboards</h2>
+    <p class="text-muted small mb-4"><span class="live-dot"></span> Sensor readings streaming into Grafana.</p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col">
+        <a class="card h-100 site-card dash-card" href="https://sedzinfo.grafana.net/public-dashboards/3cb2f6f229204ffc970aee36f41bb3f6" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-radioactive"></i> Radiation</h3>
+            <p class="card-text">Background radiation from a Geiger counter: counts per minute and dose rate in Sv/h.</p>
+          </div>
+          <div class="card-footer text-muted small">Grafana dashboard</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card dash-card" href="https://sedzinfo.grafana.net/public-dashboards/425b920caf1b48dfb15fc829d322e949" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-wind"></i> Environment Plus</h3>
+            <p class="card-text">Pimoroni Enviro+ readings: temperature, humidity, pressure, light, gases (NH3, oxidising, reducing) and particulate matter.</p>
+          </div>
+          <div class="card-footer text-muted small">Grafana dashboard</div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100 site-card dash-card" href="https://sedzinfo.grafana.net/public-dashboards/ef4111089eb74c56ad96ce3b082cc55a" target="_blank" rel="noopener">
+          <div class="card-body">
+            <h3 class="card-title h5"><i class="bi bi-cloud-sun"></i> Environment</h3>
+            <p class="card-text">Pimoroni Enviro readings: temperature, humidity, pressure, light and proximity.</p>
+          </div>
+          <div class="card-footer text-muted small">Grafana dashboard</div>
         </a>
       </div>
     </div>
