@@ -10,7 +10,7 @@ Home page for the sites published from the [sedzinfo](https://github.com/sedzinf
 
 | Site | Description |
 |---|---|
-| [Vignettes](https://sedzinfo.github.io/vignettes/) | Tutorials and worked examples in R: adaptive testing with EAP scoring, data visualisation, machine learning, psychometrics and scale validation |
+| [vignettes](https://sedzinfo.github.io/vignettes/) | Tutorials and worked examples in R: adaptive testing with EAP scoring, data visualisation, machine learning, psychometrics and scale validation |
 | [rwf](https://sedzinfo.github.io/rwf/) | R package for statistical reporting and visualisation of common methods in psychology |
 | [worldbankmodular](https://sedzinfo.github.io/worldbankmodular/) | Shiny application for exploring World Bank development indicators |
 
