@@ -19,6 +19,7 @@ Home page for the sites published from the [sedzinfo](https://github.com/sedzinf
 - `index.html` is the home page. It uses the same theme (Bootswatch flatly) as the vignettes sites.
 - Each repository with GitHub Pages turned on is served under its own path, for example `https://sedzinfo.github.io/rwf/`.
 - The home page lists the sites above and adds a card for any other repository published with GitHub Pages.
+- `consent.js` is the cookie banner and Google Analytics for every site above: each one loads it from `/consent.js`, so keep it here and edit the banner only in this file.
 - Do not create folders here named after other repositories (`vignettes`, `rwf`, `worldbankmodular`); they would clash with those sites.
 
 ![Stars](https://img.shields.io/github/stars/sedzinfo/sedzinfo.github.io)
