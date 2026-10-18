@@ -1,7 +1,8 @@
 // Cookie banner and Google Analytics for every site under https://sedzinfo.github.io/
 // Each site loads this file with <script src="/consent.js" defer></script>:
-//   the home page (index.html), the vignettes sites (quarto/_ga_consent.html in that repo)
-//   and the rwf and worldbankmodular pkgdown sites (template: includes: after_body in _pkgdown.yml).
+//   the home page (index.html) and the rwf and worldbankmodular pkgdown sites (template: includes: after_body
+//   in _pkgdown.yml). The vignettes sites (quarto/_ga_consent.html in that repo) use the full address
+//   https://sedzinfo.github.io/consent.js, because Quarto rewrites "/consent.js" to a path inside each site.
 // Google Analytics loads only after the visitor accepts. The choice is kept in localStorage,
 // which all the sites share, so visitors answer once.
 // Any link to #cookie-settings reopens the banner; one is added to the footer if the page has none.
