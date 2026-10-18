@@ -178,6 +178,9 @@
   <script src="/consent.js" defer></script>
   <script>
     // Add a card for any other repository published with GitHub Pages (the cards above stay if this fails)
+    // Card footer: a topic set in the repository's About box, else "R package" for R repositories, else the language
+    const kinds = { "r-package": "R package", "shiny": "Shiny application", "quarto": "Quarto website" };
+    const kindOf = r => kinds[(r.topics || []).find(t => t in kinds)] || (r.language === "R" ? "R package" : r.language || "");
     fetch("https://api.github.com/users/sedzinfo/repos?per_page=100")
       .then(r => r.ok ? r.json() : [])
       .then(repos => {
@@ -195,7 +198,7 @@
             col.querySelector("a").href = r.name + "/";
             col.querySelector("h2").textContent = r.name;
             col.querySelector("p").textContent = r.description || "";
-            col.querySelector(".card-footer").textContent = r.language || "";
+            col.querySelector(".card-footer").textContent = kindOf(r);
             cards.appendChild(col);
             const li = document.createElement("li");
             li.className = "nav-item";
