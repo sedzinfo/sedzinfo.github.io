@@ -1,0 +1,12 @@
+# robots.txt for every site under https://sedzinfo.github.io/
+# GitHub Pages serves robots.txt only from this repository, so list the sitemap of each new site here.
+User-agent: *
+Allow: /
+
+Sitemap: https://sedzinfo.github.io/vignettes/cat_irt_eap/sitemap.xml
+Sitemap: https://sedzinfo.github.io/vignettes/example/sitemap.xml
+Sitemap: https://sedzinfo.github.io/vignettes/illustration/sitemap.xml
+Sitemap: https://sedzinfo.github.io/vignettes/validation/sitemap.xml
+Sitemap: https://sedzinfo.github.io/rwf/sitemap.xml
+Sitemap: https://sedzinfo.github.io/snp/sitemap.xml
+Sitemap: https://sedzinfo.github.io/worldbankmodular/sitemap.xml

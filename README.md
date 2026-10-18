@@ -20,6 +20,10 @@ Home page for the sites published from the [sedzinfo](https://github.com/sedzinf
 - Each repository with GitHub Pages turned on is served under its own path, for example `https://sedzinfo.github.io/rwf/`.
 - The home page lists the sites above and adds a card for any other repository published with GitHub Pages.
 - `consent.js` is the cookie banner and Google Analytics for every site above: each one loads it from `/consent.js`, so keep it here and edit the banner only in this file.
+- `privacy.html` is the privacy note, linked from the banner and from the home page footer. It describes what `consent.js` does, so update the two together.
+- `404.html` is the page shown for any missing address on the domain that no site handles. GitHub Pages serves it at any path, so all its links are absolute.
+- `robots.txt` lets all crawlers in and lists the sitemaps of the sites above. GitHub Pages serves it only from this repository, so it covers the whole domain: add the sitemap of any new site here.
+- `favicon.svg` is the site icon (a bell curve). `favicon.ico` holds the same icon at 16x16 and 32x32 for browsers that ask for `/favicon.ico`, which also gives the icon to the pkgdown and Quarto sites, and `apple-touch-icon.png` (180x180) is the icon for phone home screens.
 - Do not create folders here named after other repositories (`vignettes`, `rwf`, `worldbankmodular`); they would clash with those sites.
 
 ![Stars](https://img.shields.io/github/stars/sedzinfo/sedzinfo.github.io)
@@ -30,5 +34,3 @@ Home page for the sites published from the [sedzinfo](https://github.com/sedzinf
 ![Last Commit](https://img.shields.io/github/last-commit/sedzinfo/sedzinfo.github.io)
 ![Contributors](https://img.shields.io/github/contributors/sedzinfo/sedzinfo.github.io)
 ![License](https://img.shields.io/github/license/sedzinfo/sedzinfo.github.io)
-![Release](https://img.shields.io/github/v/release/sedzinfo/sedzinfo.github.io)
-![Workflow Status](https://img.shields.io/github/actions/workflow/status/sedzinfo/sedzinfo.github.io/main.yml)

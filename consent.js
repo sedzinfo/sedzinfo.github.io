@@ -6,6 +6,7 @@
 // Google Analytics loads only after the visitor accepts. The choice is kept in localStorage,
 // which all the sites share, so visitors answer once.
 // Any link to #cookie-settings reopens the banner; one is added to the footer if the page has none.
+// The banner links to /privacy.html, which describes what this file does: keep the two in step.
 (function () {
   const GA_ID = "G-VSX11PYNWT";
   const KEY = "ga-consent";
@@ -38,12 +39,13 @@
   }
 
   function init() {
-    // All the sites use Bootstrap 5, so the banner is styled with its classes.
+    // All the sites use Bootstrap 5 with the Flatly theme, so the banner is styled with its classes:
+    // bg-primary is the navy of the navbars (Flatly's bg-dark is a mid-grey, too pale behind small white text).
     // Keep "cookie", "consent" and "gdpr" out of its id and classes: cookie-notice blockers (EasyList Cookie,
     // AdGuard, Surfshark's CleanWeb) hide elements named like that on every site, so visitors could never answer.
     const banner = document.createElement("div");
     banner.id = "analytics-choice";
-    banner.className = "position-fixed bottom-0 start-0 end-0 bg-dark text-light p-3 shadow d-none";
+    banner.className = "position-fixed bottom-0 start-0 end-0 bg-primary text-light p-3 shadow d-none";
     banner.style.zIndex = "1080";
     banner.setAttribute("role", "dialog");
     banner.setAttribute("aria-live", "polite");
@@ -51,7 +53,8 @@
     banner.innerHTML =
       '<div class="container d-flex flex-column flex-md-row align-items-md-center gap-3">' +
         '<p class="mb-0 small flex-grow-1">This site uses Google Analytics cookies to count visits and see which pages are read. ' +
-        'No data is collected unless you accept. You can change your choice at any time from "Cookie settings" at the bottom of the page.</p>' +
+        'No data is collected unless you accept. You can change your choice at any time from "Cookie settings" at the bottom of the page. ' +
+        '<a class="link-light" href="/privacy.html">Privacy note</a></p>' +
         '<div class="d-flex gap-2 flex-shrink-0">' +
           '<button type="button" class="btn btn-light btn-sm" data-consent="no">Reject</button>' +
           '<button type="button" class="btn btn-light btn-sm" data-consent="yes">Accept</button>' +
