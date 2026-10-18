@@ -37,14 +37,16 @@
   }
 
   function init() {
-    // All the sites use Bootstrap 5, so the banner is styled with its classes
+    // All the sites use Bootstrap 5, so the banner is styled with its classes.
+    // Keep "cookie", "consent" and "gdpr" out of its id and classes: cookie-notice blockers (EasyList Cookie,
+    // AdGuard, Surfshark's CleanWeb) hide elements named like that on every site, so visitors could never answer.
     const banner = document.createElement("div");
-    banner.id = "cookie-banner";
+    banner.id = "analytics-choice";
     banner.className = "position-fixed bottom-0 start-0 end-0 bg-dark text-light p-3 shadow d-none";
     banner.style.zIndex = "1080";
     banner.setAttribute("role", "dialog");
     banner.setAttribute("aria-live", "polite");
-    banner.setAttribute("aria-label", "Cookie consent");
+    banner.setAttribute("aria-label", "Analytics choice");
     banner.innerHTML =
       '<div class="container d-flex flex-column flex-md-row align-items-md-center gap-3">' +
         '<p class="mb-0 small flex-grow-1">This site uses Google Analytics cookies to count visits and see which pages are read. ' +
