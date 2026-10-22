@@ -25,7 +25,6 @@ Home page for the sites published from the [sedzinfo](https://github.com/sedzinf
 - `404.html` is the page shown for any missing address on the domain that no site handles. GitHub Pages serves it at any path, so all its links are absolute.
 - `robots.txt` lets all crawlers in and lists the sitemaps of the sites above. GitHub Pages serves it only from this repository, so it covers the whole domain: add the sitemap of any new site here.
 - `favicon.svg` is the site icon (a bell curve). `favicon.ico` holds the same icon at 16x16 and 32x32 for browsers that ask for `/favicon.ico`, which also gives the icon to the pkgdown and Quarto sites, and `apple-touch-icon.png` (180x180) is the icon for phone home screens.
-- Do not create folders here named after other repositories (`vignettes`, `rwf`, `worldbankmodular`); they would clash with those sites.
 
 ![Stars](https://img.shields.io/github/stars/sedzinfo/sedzinfo.github.io)
 ![Watchers](https://img.shields.io/github/watchers/sedzinfo/sedzinfo.github.io)
