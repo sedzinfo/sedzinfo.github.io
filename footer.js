@@ -18,10 +18,6 @@
     ["Cookie settings", "#cookie-settings"],   // opens the banner of consent.js
     ["Privacy", HOME + "privacy.html"],
   ];
-  // text at the left of the footer for the sites that need one, by address
-  const NOTES = {
-    "/vignettes/cat_irt_eap/": "Adapted from catR (Magis, Raîche &amp; Barrada), GPL-3",
-  };
 
   function init() {
     // where it goes: the page's own placeholder, else the footer Quarto (page-footer) already
@@ -34,16 +30,16 @@
       footer.id = "sedzinfo-footer";
       document.body.appendChild(footer);
     }
-    // note at the left, links centred, Home at the right edge
+    // links centred, Home at the right edge (the empty left cell keeps the links centred).
+    // A site's own note (e.g. a licence) goes in that site, above this footer: on Quarto,
+    // body-footer in its _quarto.yml
     footer.setAttribute("style",
       "display:grid; grid-template-columns:1fr auto 1fr; align-items:center; column-gap:1rem;" +
       "border-top:1px solid #dee2e6; padding:1rem 1.5rem; font-size:14px; line-height:1.5;" +
       "color:#6c757d; background:#fff; clear:both");
     const link = (text, href) => '<a href="' + href + '" style="color:inherit">' + text + "</a>";
-    const path = location.pathname;
-    const note = Object.keys(NOTES).find(p => path.indexOf(p) === 0);
     footer.innerHTML =
-      "<span>" + (note ? NOTES[note] : "") + "</span>" +
+      "<span></span>" +
       '<span style="text-align:center">' + LINKS.map(l => link(l[0], l[1])).join(" · ") + "</span>" +
       '<span style="text-align:right">' + link("Home", HOME) + "</span>";
   }
