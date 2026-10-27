@@ -3,6 +3,9 @@
 //   the home page (index.html) and the rwf and worldbankmodular pkgdown sites (template: includes: after_body
 //   in _pkgdown.yml). The vignettes sites (quarto/_ga_consent.html in that repo) use the full address
 //   https://sedzinfo.github.io/consent.js, because Quarto rewrites "/consent.js" to a path inside each site.
+//   The crypto Shiny app on shinyapps.io uses the full address too: it is on another domain, so it keeps
+//   its own choice in localStorage and has its own Cookie settings link. For it, the banner links to the
+//   privacy note by its full address.
 // Google Analytics loads only after the visitor accepts. The choice is kept in localStorage,
 // which all the sites share, so visitors answer once.
 // Any link to #cookie-settings reopens the banner; one is added to the footer if the page has none.
@@ -54,7 +57,7 @@
       '<div class="container d-flex flex-column flex-md-row align-items-md-center gap-3">' +
         '<p class="mb-0 small flex-grow-1">This site uses Google Analytics cookies to count visits and see which pages are read. ' +
         'No data is collected unless you accept. You can change your choice at any time from "Cookie settings" at the bottom of the page. ' +
-        '<a class="link-light" href="/privacy.html">Privacy note</a></p>' +
+        '<a class="link-light" href="https://sedzinfo.github.io/privacy.html">Privacy note</a></p>' +
         '<div class="d-flex gap-2 flex-shrink-0">' +
           '<button type="button" class="btn btn-light btn-sm" data-consent="no">Reject</button>' +
           '<button type="button" class="btn btn-light btn-sm" data-consent="yes">Accept</button>' +
