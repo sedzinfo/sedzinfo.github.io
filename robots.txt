@@ -9,4 +9,8 @@ Sitemap: https://sedzinfo.github.io/vignettes/illustration/sitemap.xml
 Sitemap: https://sedzinfo.github.io/vignettes/validation/sitemap.xml
 Sitemap: https://sedzinfo.github.io/rwf/sitemap.xml
 Sitemap: https://sedzinfo.github.io/snp/sitemap.xml
-Sitemap: https://sedzinfo.github.io/worldbankmodular/sitemap.xml
+Sitemap: https://sedzinfo.github.io/golemworldbank/sitemap.xml
+Sitemap: https://sedzinfo.github.io/golemirt/sitemap.xml
+Sitemap: https://sedzinfo.github.io/golemcrypto/sitemap.xml
+Sitemap: https://sedzinfo.github.io/golemenviro/sitemap.xml
+Sitemap: https://sedzinfo.github.io/modelsirt/sitemap.xml
