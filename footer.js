@@ -1,7 +1,7 @@
 // The footer of every site under https://sedzinfo.github.io/ — the ONLY place it is defined.
-// Used by the home page and the vignettes sites (Quarto, via quarto/_ga_consent.html, and the
-// vignettes list, via build_index.py). The pkgdown sites (rwf, worldbankmodular, crypto) keep
-// pkgdown's own footer, set in their _pkgdown.yml.
+// Used by the home page and the vignettes sites (Quarto, via quarto/_shared/_ga_consent.html, and
+// the vignettes list, via build_index.py). The pkgdown sites of the R packages keep pkgdown's own
+// footer, set in their _pkgdown.yml.
 // A site loads it BEFORE consent.js (both deferred, so they run in this order):
 //   <script src="https://sedzinfo.github.io/footer.js" defer></script>
 //   <script src="https://sedzinfo.github.io/consent.js" defer></script>
