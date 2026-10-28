@@ -1,11 +1,16 @@
 // Cookie banner and Google Analytics for every site under https://sedzinfo.github.io/
 // Each site loads this file with <script src="/consent.js" defer></script>:
-//   the home page (index.html) and the rwf and worldbankmodular pkgdown sites (template: includes: after_body
-//   in _pkgdown.yml). The vignettes sites (quarto/_ga_consent.html in that repo) use the full address
-//   https://sedzinfo.github.io/consent.js, because Quarto rewrites "/consent.js" to a path inside each site.
-//   The crypto Shiny app on shinyapps.io uses the full address too: it is on another domain, so it keeps
-//   its own choice in localStorage and has its own Cookie settings link. For it, the banner links to the
-//   privacy note by its full address.
+//   the home page (index.html) and the pkgdown sites of the R packages (template: includes: after_body
+//   in each _pkgdown.yml). The vignettes sites (quarto/_shared/_ga_consent.html in that repo) use the full
+//   address https://sedzinfo.github.io/consent.js, because Quarto rewrites "/consent.js" to a path inside
+//   each site. The Shiny apps use the full address too (R/utils_analytics.R, when app.R runs them with
+//   analytics = TRUE):
+//     https://sedzinfo-golemirt.share.connect.posit.cloud/      golemirt, on Posit Connect Cloud
+//     https://sedzinfo.shinyapps.io/golemworldbank/             golemworldbank, on shinyapps.io
+//     https://sedzinfo-golemcrypto.share.connect.posit.cloud/   golemcrypto, on Posit Connect Cloud
+//     https://sedzinfo-golemenviro.share.connect.posit.cloud/   golemenviro, on Posit Connect Cloud
+//   Each app is on another domain, so it keeps its own choice in localStorage and has its own Cookie
+//   settings link. For them, the banner links to the privacy note by its full address.
 // Google Analytics loads only after the visitor accepts. The choice is kept in localStorage,
 // which all the sites share, so visitors answer once.
 // Any link to #cookie-settings reopens the banner; one is added to the footer if the page has none.
