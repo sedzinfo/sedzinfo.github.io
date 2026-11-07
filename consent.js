@@ -5,10 +5,11 @@
 //   address https://sedzinfo.github.io/consent.js, because Quarto rewrites "/consent.js" to a path inside
 //   each site. The Shiny apps use the full address too (R/utils_analytics.R, when app.R runs them with
 //   analytics = TRUE):
-//     https://sedzinfo-golemirt.share.connect.posit.cloud/      golemirt, on Posit Connect Cloud
-//     https://sedzinfo.shinyapps.io/golemworldbank/             golemworldbank, on shinyapps.io
-//     https://sedzinfo-golemcrypto.share.connect.posit.cloud/   golemcrypto, on Posit Connect Cloud
-//     https://sedzinfo-golemenviro.share.connect.posit.cloud/   golemenviro, on Posit Connect Cloud
+//     https://sedzinfo-golemirt.share.connect.posit.cloud/           golemirt, on Posit Connect Cloud
+//     https://sedzinfo.shinyapps.io/golemworldbank/                  golemworldbank, on shinyapps.io
+//     https://sedzinfo-golemcrypto.share.connect.posit.cloud/        golemcrypto, on Posit Connect Cloud
+//     https://sedzinfo-golemstockindices.share.connect.posit.cloud/  golemstockindices, on Posit Connect Cloud
+//     https://sedzinfo-golemenviro.share.connect.posit.cloud/        golemenviro, on Posit Connect Cloud
 //   Each app is on another domain, so it keeps its own choice in localStorage and has its own Cookie
 //   settings link. For them, the banner links to the privacy note by its full address.
 // Google Analytics loads only after the visitor accepts. The choice is kept in localStorage,
