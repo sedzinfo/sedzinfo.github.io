@@ -12,5 +12,6 @@ Sitemap: https://sedzinfo.github.io/snp/sitemap.xml
 Sitemap: https://sedzinfo.github.io/golemworldbank/sitemap.xml
 Sitemap: https://sedzinfo.github.io/golemirt/sitemap.xml
 Sitemap: https://sedzinfo.github.io/golemcrypto/sitemap.xml
+Sitemap: https://sedzinfo.github.io/golemstockindices/sitemap.xml
 Sitemap: https://sedzinfo.github.io/golemenviro/sitemap.xml
 Sitemap: https://sedzinfo.github.io/modelsirt/sitemap.xml
