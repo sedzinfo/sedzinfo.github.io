@@ -10,6 +10,7 @@
 //     https://sedzinfo-golemcrypto.share.connect.posit.cloud/        golemcrypto, on Posit Connect Cloud
 //     https://sedzinfo-golemstockindices.share.connect.posit.cloud/  golemstockindices, on Posit Connect Cloud
 //     https://sedzinfo-golemenviro.share.connect.posit.cloud/        golemenviro, on Posit Connect Cloud
+//     https://sedzinfo-golemcat.share.connect.posit.cloud/           golemcat, on Posit Connect Cloud
 //   Each app is on another domain, so it keeps its own choice in localStorage and has its own Cookie
 //   settings link. For them, the banner links to the privacy note by its full address.
 // Google Analytics loads only after the visitor accepts. The choice is kept in localStorage,
