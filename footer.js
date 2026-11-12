@@ -37,11 +37,31 @@
       "display:grid; grid-template-columns:1fr auto 1fr; align-items:center; column-gap:1rem;" +
       "border-top:1px solid #dee2e6; padding:1rem 1.5rem; font-size:14px; line-height:1.5;" +
       "color:#6c757d; background:#fff; clear:both");
-    const link = (text, href) => '<a href="' + href + '" style="color:inherit">' + text + "</a>";
+    // where the links wrap (narrow phones), a link stays whole and each dot stays with the link
+    // before it (a no-break space before the dot), rather than starting a line
+    const link = (text, href) => '<a href="' + href + '" style="color:inherit; white-space:nowrap">' + text + "</a>";
     footer.innerHTML =
       "<span></span>" +
-      '<span style="text-align:center">' + LINKS.map(l => link(l[0], l[1])).join(" · ") + "</span>" +
+      '<span style="text-align:center">' + LINKS.map(l => link(l[0], l[1])).join("&nbsp;· ") + "</span>" +
       '<span style="text-align:right">' + link("Home", HOME) + "</span>";
+    // phones and other touch screens: the links 40px high, big enough for a finger (a line of
+    // text is 21px); on phones, the links centred with Home under them, instead of Home squeezed
+    // in at the right. A stylesheet, as inline styles cannot depend on the screen (hence the
+    // !important against them). A desktop with a mouse is not affected
+    if (!document.getElementById("sedzinfo-footer-style")) {
+      const style = document.createElement("style");
+      style.id = "sedzinfo-footer-style";
+      style.textContent =
+        "@media (max-width: 767.98px), (hover: none) and (pointer: coarse) {" +
+          " #sedzinfo-footer a { display: inline-block; padding: 10px 4px; }" +
+        " }" +
+        " @media (max-width: 575.98px) {" +
+          " #sedzinfo-footer { grid-template-columns: 1fr !important; }" +
+          " #sedzinfo-footer > span:first-child { display: none; }" +
+          " #sedzinfo-footer > span { text-align: center !important; }" +
+        " }";
+      document.head.appendChild(style);
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

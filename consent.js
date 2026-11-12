@@ -65,12 +65,30 @@
         '<p class="mb-0 small flex-grow-1">This site uses Google Analytics cookies to count visits and see which pages are read. ' +
         'No data is collected unless you accept. You can change your choice at any time from "Cookie settings" at the bottom of the page. ' +
         '<a class="link-light" href="https://sedzinfo.github.io/privacy.html">Privacy note</a></p>' +
-        '<div class="d-flex gap-2 flex-shrink-0">' +
+        '<div class="d-flex gap-2 flex-shrink-0 choice-buttons">' +
           '<button type="button" class="btn btn-light btn-sm" data-consent="no">Reject</button>' +
           '<button type="button" class="btn btn-light btn-sm" data-consent="yes">Accept</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(banner);
+
+    // Phones and other touch screens: the two buttons big enough for a finger (40px high, btn-sm is
+    // 31px) and, on phones, sharing the width of the banner. A stylesheet of its own, as media queries
+    // cannot go inline, and so that it works on the Bootstrap 3 apps too (their analytics.css draws the
+    // banner); a desktop with a mouse is not affected
+    if (!document.getElementById("analytics-choice-style")) {
+      const style = document.createElement("style");
+      style.id = "analytics-choice-style";
+      style.textContent =
+        "@media (max-width: 767.98px), (hover: none) and (pointer: coarse) {" +
+          " #analytics-choice [data-consent] { min-height: 40px; }" +
+        " }" +
+        " @media (max-width: 767.98px) {" +
+          " #analytics-choice .choice-buttons { flex: 1 1 100%; }" +
+          " #analytics-choice [data-consent] { flex: 1 1 0; }" +
+        " }";
+      document.head.appendChild(style);
+    }
 
     banner.querySelectorAll("[data-consent]").forEach(btn => btn.addEventListener("click", () => {
       const v = btn.dataset.consent;
