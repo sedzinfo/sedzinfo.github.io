@@ -13,6 +13,7 @@ using a new file is deployed, or the app asks for a file that is not there yet.
 |---|---|---|
 | `consent.js` | cookie banner; loads Google Analytics only after the visitor accepts | every site and app with analytics |
 | `footer.js` | the footer of the sites | the home page and the vignettes sites |
+| `shiny/apps.css` | the stylesheet of the apps: dark mode, plotly's toolbar, the About tab, the footer, tap targets on phones; each app keeps only its own rules | all 7 apps |
 | `shiny/analytics.js` | reports the tabs and the downloads of an app to Google Analytics, after consent | golemcat, golemcrypto, golemenviro, golemirt, golemstockindices, golemworldbank |
 | `shiny/analytics.css` | the cookie banner and the footer on the Bootstrap 3 apps | golemenviro, golemworldbank |
 | `shiny/keep_alive.js` | a ping every 15 seconds, so that proxies keep an idle app connected | golemcat, golemcrypto, golemirt, golemstockindices (run with `keep_alive = TRUE`) |

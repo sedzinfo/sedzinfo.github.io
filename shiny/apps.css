@@ -1,0 +1,378 @@
+/* The stylesheet shared by the Shiny apps: golemcat, golemcrypto, golemenviro, golemeurostat, golemirt,
+   golemstockindices and golemworldbank. It is kept here only (https://sedzinfo.github.io/shiny/apps.css):
+   each app loads it after the stylesheets of Bootstrap and of its inputs, and before its own (shared_css()
+   in its R code), which keep what is the app's own and can override anything here. A change here
+   reaches every app without deploying them (browsers may keep the old file up to 10 minutes): check
+   it in a Bootstrap 3 app (golemworldbank) and a Bootstrap 5 one (golemcrypto), in light and dark mode.
+
+   The apps are of three kinds, and each rule says which it is for:
+   - Bootstrap 5 with bslib's light/dark switch (golemcat, golemcrypto, golemstockindices): dark mode is
+     [data-bs-theme="dark"] on <html>; Bootstrap styles the page, and the charts get their colors in R;
+   - Bootstrap 5 with dark_mode.js (golemirt): html.dark-mode, with data-bs-theme="dark" too; Bootstrap
+     styles the page, and this file the charts;
+   - Bootstrap 3 with dark_mode.js (golemenviro, golemeurostat, golemworldbank): html.dark-mode only,
+     selected below as html.dark-mode:not([data-bs-theme]); this file styles the page and the charts.
+     Bootstrap 3 makes 1rem 10px, so the rules that reach these apps use px and em.
+   The selectors are plain ones, without :is() or :where(), which browsers older than 2021 (still on some
+   phones) do not know: they would drop the whole rule. :has() is used only where such a browser loses
+   little (the space above the footer, the tap targets of the Bootstrap 5 footers).
+   plotly and DT write their colors inline, which only !important overrides. */
+
+
+/* ------------------------------------------------------------------------------------------------
+   plotly's toolbar (modebar), in every app
+   plotly colors it once, from the chart's background: over a white chart, the buttons on half-
+   transparent white with gray icons, darker on hover and for the active button. Over the transparent
+   charts of golemcrypto and golemstockindices that was a half-black box, and in dark mode the icons
+   need to be light: the same look everywhere instead, on the color behind the chart, which is
+   --chart-bg-rgb where an app sets it (the panels of golemenviro), else the page's (Bootstrap 5,
+   and the Bootstrap 3 dark mode below), else white. */
+.js-plotly-plot .modebar-group {
+  background-color: rgba(var(--chart-bg-rgb, var(--bs-body-bg-rgb, 255, 255, 255)), 0.5) !important;
+}
+.js-plotly-plot .modebar-btn .icon path {
+  fill: rgba(68, 68, 68, 0.3) !important;
+}
+.js-plotly-plot .modebar-btn:hover .icon path,
+.js-plotly-plot .modebar-btn.active .icon path {
+  fill: rgba(68, 68, 68, 0.7) !important;
+}
+html.dark-mode .js-plotly-plot .modebar-btn .icon path,
+[data-bs-theme="dark"] .js-plotly-plot .modebar-btn .icon path {
+  fill: rgba(255, 255, 255, 0.35) !important;
+}
+html.dark-mode .js-plotly-plot .modebar-btn:hover .icon path,
+[data-bs-theme="dark"] .js-plotly-plot .modebar-btn:hover .icon path,
+html.dark-mode .js-plotly-plot .modebar-btn.active .icon path,
+[data-bs-theme="dark"] .js-plotly-plot .modebar-btn.active .icon path {
+  fill: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* the buttons of plotly's updatemenus (Play / Pause / Stop, Linear / Log): plotly paints the one under
+   the mouse, and the active one, a fixed light color (#F4FAFF) that has no setting, and that the light
+   text of dark mode cannot be read on: the hover color of the dropdowns instead (Bootstrap 3), or the
+   active color of the range buttons of golemcrypto and golemstockindices (Bootstrap 5) */
+html.dark-mode .js-plotly-plot .updatemenu-item-rect[style*="fill: rgb(244, 250, 255)"] {
+  fill: #3d4b5c !important;
+}
+[data-bs-theme="dark"]:not(.dark-mode) .js-plotly-plot .updatemenu-item-rect[style*="fill: rgb(244, 250, 255)"] {
+  fill: #6c757d !important;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   The charts in dark mode, where CSS colors them (golemirt and the Bootstrap 3 apps) */
+html.dark-mode .js-plotly-plot .main-svg {
+  background: transparent !important;
+}
+html.dark-mode .js-plotly-plot .bg,
+html.dark-mode .js-plotly-plot .legend .bg,
+html.dark-mode .js-plotly-plot .geo .bg rect {
+  fill: transparent !important;
+}
+/* light text; not in the hover labels, which plotly colors to suit their box, and not in annotations
+   with a color of their own (the gray year of golemworldbank's animations, the blue EAP and red MAP of
+   golemirt): only black ones and plotly's default dark gray */
+html.dark-mode .js-plotly-plot .main-svg text:not(.hoverlayer *):not(.annotation-text),
+html.dark-mode .js-plotly-plot .main-svg text.annotation-text[style*="fill: rgb(0, 0, 0)"],
+html.dark-mode .js-plotly-plot .main-svg text.annotation-text[style*="fill: rgb(68, 68, 68)"] {
+  fill: #ddd !important;
+}
+/* a dark grid and light axes at zero, as in light mode the grid is pale and the axes at zero dark */
+html.dark-mode .js-plotly-plot .gridlayer path {
+  stroke: #444 !important;
+}
+html.dark-mode .js-plotly-plot .zerolinelayer path {
+  stroke: #aaa !important;
+}
+/* the buttons and the slider of the animations */
+html.dark-mode .js-plotly-plot .updatemenu-item-rect {
+  fill: #2b2b2b !important;
+  stroke: #555 !important;
+}
+html.dark-mode .js-plotly-plot .slider-rail-rect {
+  fill: #444 !important;
+}
+/* maps */
+html.dark-mode .js-plotly-plot .geo .land {
+  fill: #2b2b2b !important;
+}
+html.dark-mode .js-plotly-plot .geo .coastlines path {
+  stroke: #888 !important;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   The page in dark mode, Bootstrap 3 apps (golemenviro, golemeurostat, golemworldbank);
+   Bootstrap 5 has a dark mode of its own */
+html.dark-mode:not([data-bs-theme]) {
+  color-scheme: dark;
+  --chart-bg-rgb: 30, 30, 30;   /* the page, for plotly's toolbar */
+}
+html.dark-mode:not([data-bs-theme]) body {
+  background-color: #1e1e1e;
+  color: #ddd;
+}
+html.dark-mode:not([data-bs-theme]) a {
+  color: #6ea8fe;
+}
+
+/* the navbar, its menu button on phones and the line above the open menu */
+html.dark-mode:not([data-bs-theme]) .navbar-default {
+  background-color: #2b2b2b;
+  border-color: #3a3a3a;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-brand,
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-nav > li > a {
+  color: #ccc;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-brand:hover,
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-nav > .active > a,
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-nav > .active > a:hover,
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-nav > .active > a:focus {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-toggle {
+  border-color: #555;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-toggle:hover,
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-toggle:focus {
+  background-color: #3a3a3a;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-toggle .icon-bar {
+  background-color: #ccc;
+}
+html.dark-mode:not([data-bs-theme]) .navbar-default .navbar-collapse {
+  border-color: #3a3a3a;
+}
+
+/* tabs inside a tab (the Increased / Decreased tabs of golemworldbank's Change (%)) */
+html.dark-mode:not([data-bs-theme]) .nav-tabs {
+  border-bottom-color: #3a3a3a;
+}
+html.dark-mode:not([data-bs-theme]) .nav-tabs > li.active > a,
+html.dark-mode:not([data-bs-theme]) .nav-tabs > li.active > a:hover,
+html.dark-mode:not([data-bs-theme]) .nav-tabs > li.active > a:focus {
+  background-color: #2b2b2b;
+  color: #fff;
+  border-color: #3a3a3a #3a3a3a transparent;
+}
+html.dark-mode:not([data-bs-theme]) .nav-tabs > li > a:hover {
+  background-color: #2b2b2b;
+  border-color: #3a3a3a;
+}
+
+/* the panels and inputs */
+html.dark-mode:not([data-bs-theme]) .well {
+  background-color: #2b2b2b;
+  border-color: #3a3a3a;
+}
+html.dark-mode:not([data-bs-theme]) .form-control,
+html.dark-mode:not([data-bs-theme]) .selectize-input,
+html.dark-mode:not([data-bs-theme]) .selectize-input.full,
+html.dark-mode:not([data-bs-theme]) .selectize-dropdown {
+  background: #2b2b2b;
+  color: #ddd;
+  border-color: #555;
+  box-shadow: none;
+}
+/* while open, selectize turns the box white (.input-active, .focus): keep it dark */
+html.dark-mode:not([data-bs-theme]) .selectize-control .selectize-input.focus,
+html.dark-mode:not([data-bs-theme]) .selectize-control .selectize-input.input-active,
+html.dark-mode:not([data-bs-theme]) .selectize-control.single .selectize-input.input-active {
+  background: #2b2b2b !important;
+  border-color: #777;
+}
+/* the text typed into a dropdown: selectize's own, more specific rules would keep it dark gray */
+html.dark-mode:not([data-bs-theme]) .selectize-control .selectize-input input,
+html.dark-mode:not([data-bs-theme]) .selectize-control .selectize-input input:focus {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;   /* Chrome and Safari draw the typed text with this */
+  caret-color: #fff;               /* the blinking cursor */
+}
+html.dark-mode:not([data-bs-theme]) .selectize-control .selectize-input input::placeholder {
+  color: #999 !important;
+  -webkit-text-fill-color: #999;
+}
+html.dark-mode:not([data-bs-theme]) .selectize-dropdown .option,
+html.dark-mode:not([data-bs-theme]) .selectize-dropdown .optgroup-header {
+  color: #ddd;
+}
+/* the letters that match what was typed */
+html.dark-mode:not([data-bs-theme]) .selectize-dropdown .highlight {
+  background: rgba(255, 213, 79, 0.35);
+  color: #fff;
+}
+html.dark-mode:not([data-bs-theme]) .selectize-dropdown .active {
+  background-color: #3d4b5c;
+  color: #fff;
+}
+html.dark-mode:not([data-bs-theme]) .selectize-control.multi .selectize-input > div {
+  background: #3a3a3a;
+  color: #ddd;
+}
+html.dark-mode:not([data-bs-theme]) .irs--shiny .irs-line {
+  background: #3a3a3a;
+  border-color: #555;
+}
+html.dark-mode:not([data-bs-theme]) .irs--shiny .irs-min,
+html.dark-mode:not([data-bs-theme]) .irs--shiny .irs-max,
+html.dark-mode:not([data-bs-theme]) .irs--shiny .irs-grid-text {
+  background: #3a3a3a;
+  color: #ccc;
+}
+
+/* DT tables */
+html.dark-mode:not([data-bs-theme]) table.dataTable tbody tr,
+html.dark-mode:not([data-bs-theme]) table.dataTable.display tbody tr.odd,
+html.dark-mode:not([data-bs-theme]) table.dataTable.display tbody tr.even,
+html.dark-mode:not([data-bs-theme]) table.dataTable tbody td {
+  background-color: #1e1e1e !important;
+  color: #ddd;
+}
+html.dark-mode:not([data-bs-theme]) table.dataTable.stripe tbody tr.odd,
+html.dark-mode:not([data-bs-theme]) table.dataTable.display tbody tr.odd td {
+  background-color: #262626 !important;
+}
+html.dark-mode:not([data-bs-theme]) table.dataTable thead th {
+  color: #ddd;
+}
+html.dark-mode:not([data-bs-theme]) table.dataTable thead th,
+html.dark-mode:not([data-bs-theme]) table.dataTable tbody td {
+  border-color: #3a3a3a !important;
+}
+html.dark-mode:not([data-bs-theme]) .dataTables_wrapper .dataTables_filter,
+html.dark-mode:not([data-bs-theme]) .dataTables_wrapper .dataTables_info,
+html.dark-mode:not([data-bs-theme]) .dataTables_wrapper .dataTables_length,
+html.dark-mode:not([data-bs-theme]) .dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: #ccc !important;
+}
+html.dark-mode:not([data-bs-theme]) .dataTables_wrapper input,
+html.dark-mode:not([data-bs-theme]) .dataTables_wrapper select {
+  background-color: #2b2b2b;
+  color: #ddd;
+  border: 1px solid #555;
+}
+
+/* the About tab */
+html.dark-mode:not([data-bs-theme]) .about th,
+html.dark-mode:not([data-bs-theme]) .about td {
+  border-color: #3a3a3a;
+}
+html.dark-mode:not([data-bs-theme]) .about code {
+  background-color: #2b2b2b;
+  color: #f0a0b0;
+}
+html.dark-mode:not([data-bs-theme]) .about pre {
+  background-color: #2b2b2b;
+  border-color: #3a3a3a;
+  color: #ddd;
+}
+html.dark-mode:not([data-bs-theme]) .about pre code {
+  background-color: transparent;
+  color: inherit;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   The dark mode button of dark_mode.js (golemenviro, golemeurostat, golemirt, golemworldbank), in
+   the navbar of Bootstrap 3 (ul.navbar-right) or of Bootstrap 5 (a.nav-link) */
+.navbar-right > li > #dark-mode-toggle {
+  font-size: 16px;
+  line-height: 17px;
+  margin-right: 15px;
+}
+#dark-mode-toggle.nav-link {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   The About tab (.about, golemcrypto, golemenviro, golemstockindices): a column of text that stays
+   easy to read on wide screens, with code on a shaded background and lines between the rows of
+   its tables */
+.about {
+  max-width: 832px;
+  margin: 0 auto 32px;
+}
+.about h3 {
+  margin-top: 32px;
+}
+.about pre {
+  padding: 12px 16px;
+  background-color: var(--bs-tertiary-bg, #f5f5f5);
+  border-radius: var(--bs-border-radius, 4px);
+}
+.about table {
+  margin-bottom: 16px;
+}
+.about th,
+.about td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--bs-border-color, #ddd);
+  vertical-align: top;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   Inputs and the footer, in every app */
+
+/* taller dropdown lists: 70% of the window (selectize's own is 200px) */
+.selectize-dropdown-content {
+  max-height: 70vh;
+}
+
+/* the footer with the Cookie settings and Privacy links (analytics_footer()): in the Bootstrap 5
+   apps, more space above it moves it lower (the Bootstrap 3 ones place it themselves) */
+div:has(> a[href="#cookie-settings"]):not(.analytics-footer) {
+  margin-top: 2rem;
+}
+
+/* phones and other touch screens: tap targets big enough for a finger (a desktop with a mouse is
+   not affected) */
+@media (max-width: 767.98px), (hover: none) and (pointer: coarse) {
+  /* the Cookie settings and Privacy links, about 40px high: the footer of the Bootstrap 3 apps by its
+     class, and the others by their link, in two rules, as a browser without :has() drops a whole rule */
+  .analytics-footer > a {
+    display: inline-block;
+    padding: 10px 6px;
+  }
+  div:has(> a[href="#cookie-settings"]) > a {
+    display: inline-block;
+    padding: 10px 6px;
+  }
+  /* bslib's light/dark switch (golemcat, golemcrypto, golemstockindices): 40px instead of 29px
+     (its padding is --size-xxs, 0.25rem) */
+  #dark_mode {
+    --size-xxs: .6rem;
+  }
+}
+
+/* phones */
+@media (max-width: 767.98px) {
+  /* iOS zooms into a field whose text is smaller than 16px when it is tapped */
+  .selectize-input input {
+    font-size: 16px !important;
+  }
+  /* long code in the About tab wraps instead of widening the page */
+  .about :not(pre) > code {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* touch screens: slider handles big enough to catch with a finger, still centred on the bar (whose
+   middle is 29px from the top of the slider); ion.rangeSlider measures the handle when it starts,
+   after this file is loaded, so it places the larger handle correctly */
+@media (pointer: coarse) {
+  .irs--shiny .irs-handle {
+    width: 28px;
+    height: 28px;
+    top: 15px;
+    border-radius: 28px;
+  }
+}
