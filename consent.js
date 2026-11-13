@@ -4,7 +4,7 @@
 //   in each _pkgdown.yml). The vignettes sites (quarto/_shared/_ga_consent.html in that repo) use the full
 //   address https://sedzinfo.github.io/consent.js, because Quarto rewrites "/consent.js" to a path inside
 //   each site. The Shiny apps use the full address too (R/utils_analytics.R, when app.R runs them with
-//   analytics = TRUE):
+//   analytics = TRUE), with the other files they share, in shiny/ (see README.md):
 //     https://sedzinfo-golemirt.share.connect.posit.cloud/           golemirt, on Posit Connect Cloud
 //     https://sedzinfo.shinyapps.io/golemworldbank/                  golemworldbank, on shinyapps.io
 //     https://sedzinfo-golemcrypto.share.connect.posit.cloud/        golemcrypto, on Posit Connect Cloud
@@ -72,15 +72,18 @@
       '</div>';
     document.body.appendChild(banner);
 
-    // Phones and other touch screens: the two buttons big enough for a finger (40px high, btn-sm is
-    // 31px) and, on phones, sharing the width of the banner. A stylesheet of its own, as media queries
-    // cannot go inline, and so that it works on the Bootstrap 3 apps too (their analytics.css draws the
-    // banner); a desktop with a mouse is not affected
+    // A stylesheet of its own, as media queries cannot go inline, and so that it works on the Bootstrap 3
+    // apps too (shiny/analytics.css draws the banner there):
+    // - the navy of the sites on every page, also in the Shiny apps whose theme has another primary
+    //   color (such as the orange of golemcrypto), too pale behind the white text;
+    // - phones and other touch screens: the two buttons big enough for a finger (40px high, btn-sm is
+    //   31px) and, on phones, sharing the width of the banner; a desktop with a mouse is not affected
     if (!document.getElementById("analytics-choice-style")) {
       const style = document.createElement("style");
       style.id = "analytics-choice-style";
       style.textContent =
-        "@media (max-width: 767.98px), (hover: none) and (pointer: coarse) {" +
+        "#analytics-choice { background-color: #2c3e50 !important; }" +
+        " @media (max-width: 767.98px), (hover: none) and (pointer: coarse) {" +
           " #analytics-choice [data-consent] { min-height: 40px; }" +
         " }" +
         " @media (max-width: 767.98px) {" +
