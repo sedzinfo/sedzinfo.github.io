@@ -14,8 +14,10 @@ using a new file is deployed, or the app asks for a file that is not there yet.
 | `consent.js` | cookie banner; loads Google Analytics only after the visitor accepts | every site and app with analytics |
 | `footer.js` | the footer of the sites | the home page and the vignettes sites |
 | `shiny/apps.css` | the stylesheet of the apps: dark mode, plotly's toolbar, the About tab, the footer, tap targets on phones; each app keeps only its own rules | all 7 apps |
-| `shiny/analytics.js` | reports the tabs and the downloads of an app to Google Analytics, after consent | golemcat, golemcrypto, golemenviro, golemirt, golemstockindices, golemworldbank |
-| `shiny/analytics.css` | the cookie banner and the footer on the Bootstrap 3 apps | golemenviro, golemworldbank |
+| `shiny/layout.css` | the layout of the apps whose tabs are charts under a navbar: a compact navbar, charts that fill the window, and on phones a page that scrolls, with entries big enough for a finger | golemeurostat, golemworldbank |
+| `shiny/layout.js` | the charts of those apps laid out for a phone (smaller font and margins, wrapped titles, the animation buttons under the chart) | golemeurostat, golemworldbank |
+| `shiny/analytics.js` | reports the tabs and the downloads of an app to Google Analytics, after consent | golemcat, golemcrypto, golemenviro, golemeurostat, golemirt, golemstockindices, golemworldbank |
+| `shiny/analytics.css` | the cookie banner and the footer on the Bootstrap 3 apps | golemenviro, golemeurostat, golemworldbank |
 | `shiny/keep_alive.js` | a ping every 15 seconds, so that proxies keep an idle app connected | golemcat, golemcrypto, golemirt, golemstockindices (run with `keep_alive = TRUE`) |
 | `shiny/dark_mode.js` | the moon/sun button and the dark mode of the apps that draw their own | golemenviro, golemeurostat, golemirt, golemworldbank |
 

@@ -1,6 +1,6 @@
 // Reports the tabs of a Shiny app, and its downloads, to Google Analytics, as pages and downloads.
-// Shared by the Shiny apps (golemcat, golemcrypto, golemenviro, golemirt, golemstockindices,
-// golemworldbank), which load it from https://sedzinfo.github.io/shiny/analytics.js, after consent.js,
+// Shared by the Shiny apps (golemcat, golemcrypto, golemenviro, golemeurostat, golemirt,
+// golemstockindices, golemworldbank), which load it from https://sedzinfo.github.io/shiny/analytics.js, after consent.js,
 // when they run with analytics = TRUE. A change here reaches all of them: the privacy note
 // (/privacy.html) says what is counted, so keep the two in step.
 // gtag() only exists once the visitor accepts on the cookie banner (consent.js), so nothing is sent before.

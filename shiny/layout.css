@@ -1,0 +1,128 @@
+/* The layout of the Shiny apps whose tabs are charts under a navbar, on Bootstrap 3: golemeurostat
+   and golemworldbank. It is kept here only (https://sedzinfo.github.io/shiny/layout.css): each app
+   loads it after apps.css, with layout.js, which lays out the charts on phones (shared_layout() in
+   its R code). A change here reaches both apps without deploying them (browsers may keep the old
+   file up to 10 minutes): check it in both, on a desktop and on a phone, upright and sideways.
+
+   On a desktop the navbar is compact, and each tab fills the window under it: the charts stretch to
+   the bottom of the window, and a tab that is longer than the window scrolls by itself, under a
+   navbar that stays in place. On a phone the whole page scrolls instead. */
+
+
+/* ------------------------------------------------------------------------------------------------
+   Desktop */
+
+/* a compact navbar */
+.navbar-nav > li > a,
+.navbar-brand {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  height: 25px;
+}
+.navbar {
+  min-height: 20px;
+}
+
+/* the charts fill the space left under the navbar and the inputs */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+body > .container-fluid {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tab-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.tab-content > .tab-pane.active {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+/* a Bootstrap row sticks out 15px on the right (margin-right: -15px), which would make the
+   scrolling tab scroll sideways */
+.tab-pane > .row {
+  margin-right: 0;
+}
+.tab-pane .plotly.html-widget-output {
+  flex: 1 1 0;
+  min-height: 300px;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   Phones. On a desktop (wider than 767px and not a short touch screen) nothing below applies. The
+   "html body" in front of the selectors puts these rules above those of the desktop and of the
+   stylesheets that come after this file (analytics.css). */
+
+/* Phones (portrait, where the navbar collapses behind its toggle) and phones held sideways (short
+   touch screens): the whole page scrolls, instead of the tab inside a window-high box. The charts
+   still fill the screen when the inputs leave room, and never get smaller than 300px; the footer is
+   reached by scrolling the page. 100dvh is the height of the visible area, without the browser bars
+   (100vh is the fallback for older browsers). */
+@media (max-width: 767px), (max-height: 500px) and (pointer: coarse) {
+  html body {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  html body .tab-content > .tab-pane.active {
+    overflow: visible;
+  }
+  /* a wide table scrolls sideways by itself, not the page (or its search box) */
+  html body .tab-pane table.dataTable {
+    display: block;
+    overflow-x: auto;
+  }
+  /* the footer: no padding of its own, as its links get theirs, for a finger (apps.css) */
+  html body .analytics-footer {
+    padding: 0;
+  }
+}
+
+/* Phones in portrait: the menu of the navbar toggle */
+@media (max-width: 767px) {
+  /* menu entries 40px high, for a finger (the compact desktop navbar has 25px) */
+  html body .navbar-nav > li > a {
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* the open menu shows all its entries, without a scroll box of its own */
+  html body .navbar-collapse {
+    max-height: none;
+  }
+  /* the toggle button 40px high */
+  html body .navbar-toggle {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+/* Phones held sideways (short touch screens, where the navbar does not collapse): navbar entries
+   40px high for a finger, and charts as high as the screen (less a little), so that a chart is seen
+   whole once the page is scrolled to it. */
+@media (max-height: 500px) and (pointer: coarse) {
+  html body .navbar-nav > li > a {
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  html body .tab-pane .plotly.html-widget-output {
+    min-height: 300px;
+    min-height: calc(100dvh - 40px);
+  }
+}
