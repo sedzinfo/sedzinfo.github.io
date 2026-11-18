@@ -1,18 +1,7 @@
 # robots.txt for every site under https://sedzinfo.github.io/
-# GitHub Pages serves robots.txt only from this repository, so list the sitemap of each new site here.
+# GitHub Pages serves robots.txt only from this repository.
+# sitemap.xml is an index of the sitemaps of every site: add each new site's sitemap there, not here.
 User-agent: *
 Allow: /
 
-Sitemap: https://sedzinfo.github.io/vignettes/cat_irt_eap/sitemap.xml
-Sitemap: https://sedzinfo.github.io/vignettes/example/sitemap.xml
-Sitemap: https://sedzinfo.github.io/vignettes/illustration/sitemap.xml
-Sitemap: https://sedzinfo.github.io/vignettes/validation/sitemap.xml
-Sitemap: https://sedzinfo.github.io/rwf/sitemap.xml
-Sitemap: https://sedzinfo.github.io/snp/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemworldbank/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemirt/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemcrypto/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemstockindices/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemenviro/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemcat/sitemap.xml
-Sitemap: https://sedzinfo.github.io/golemeurostat/sitemap.xml
+Sitemap: https://sedzinfo.github.io/sitemap.xml

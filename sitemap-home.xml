@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Pages that no generated sitemap lists: this repository's home page and the vignettes hub (vignettes/docs/index.html). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://sedzinfo.github.io/</loc></url>
+  <url><loc>https://sedzinfo.github.io/vignettes/</loc></url>
+</urlset>

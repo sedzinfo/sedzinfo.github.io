@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap index for every site under https://sedzinfo.github.io/.
+  Submit this one file in Google Search Console and Bing Webmaster Tools; they read the sitemaps listed here.
+  When a repository gets a new GitHub Pages site, add its sitemap below.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- this repository: the home page and the vignettes hub -->
+  <sitemap><loc>https://sedzinfo.github.io/sitemap-home.xml</loc></sitemap>
+  <!-- vignettes: Quarto websites -->
+  <sitemap><loc>https://sedzinfo.github.io/vignettes/cat_irt_eap/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/vignettes/example/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/vignettes/illustration/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/vignettes/validation/sitemap.xml</loc></sitemap>
+  <!-- R packages: pkgdown websites -->
+  <sitemap><loc>https://sedzinfo.github.io/rwf/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/snp/sitemap.xml</loc></sitemap>
+  <!-- Shiny apps built as golem packages: pkgdown websites -->
+  <sitemap><loc>https://sedzinfo.github.io/golemworldbank/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/golemirt/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/golemcrypto/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/golemstockindices/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/golemenviro/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/golemcat/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/golemeurostat/sitemap.xml</loc></sitemap>
+</sitemapindex>
