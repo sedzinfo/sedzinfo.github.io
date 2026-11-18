@@ -1,6 +1,6 @@
 # robots.txt for every site under https://sedzinfo.github.io/
 # GitHub Pages serves robots.txt only from this repository.
-# sitemap.xml is an index of the sitemaps of every site: add each new site's sitemap there, not here.
+# sitemap.xml, the index of the sitemaps of every site, is rebuilt every day by .github/workflows/sitemap.yml.
 User-agent: *
 Allow: /
 

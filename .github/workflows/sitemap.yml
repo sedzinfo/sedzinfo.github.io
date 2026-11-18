@@ -1,0 +1,49 @@
+# Rebuilds sitemap.xml, the index of the sitemaps of every GitHub Pages site under
+# https://sedzinfo.github.io/, and sitemap-home.xml (see .github/scripts/build_sitemap.py),
+# and commits them when they change. Search Console needs only /sitemap.xml: a new site
+# appears in it within a day of its first deploy, with no change here.
+# From the Actions tab, "Run workflow" rebuilds it at once.
+name: Update sitemap index
+
+on:
+  schedule:
+    - cron: "17 4 * * *"       # every day at 04:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sitemap.yml"
+      - ".github/scripts/build_sitemap.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sitemap
+  cancel-in-progress: false
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build the sitemap index
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/build_sitemap.py
+
+      # No [skip ci] in the message: GitHub Pages must deploy the new files
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml sitemap-home.xml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Update sitemap index"
+          git pull --rebase
+          git push
