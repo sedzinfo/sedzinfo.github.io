@@ -2,6 +2,8 @@
 # https://sedzinfo.github.io/, and sitemap-home.xml (see .github/scripts/build_sitemap.py),
 # and commits them when they change. Search Console needs only /sitemap.xml: a new site
 # appears in it within a day of its first deploy, with no change here.
+# Then .github/scripts/indexnow.py tells Bing and the other IndexNow search engines which pages
+# changed since its last run, and records them in .github/indexnow.json.
 # From the Actions tab, "Run workflow" rebuilds it at once.
 name: Update sitemap index
 
@@ -14,6 +16,7 @@ on:
     paths:
       - ".github/workflows/sitemap.yml"
       - ".github/scripts/build_sitemap.py"
+      - ".github/scripts/indexnow.py"
 
 permissions:
   contents: write
@@ -25,7 +28,7 @@ concurrency:
 jobs:
   sitemap:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
 
@@ -34,16 +37,24 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python3 .github/scripts/build_sitemap.py
 
-      # No [skip ci] in the message: GitHub Pages must deploy the new files
+      # Needs the key file (<key>.txt at the root) live on the site; after the push that adds it,
+      # the step waits up to 5 minutes for GitHub Pages to deploy it.
+      - name: Tell IndexNow which pages changed
+        run: python3 .github/scripts/indexnow.py
+
+      # Runs even when the IndexNow step failed, so a new sitemap still goes out: each script writes
+      # its files only when it succeeds. No [skip ci] in the message: GitHub Pages must deploy the new files
       - name: Commit and push
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml sitemap-home.xml
+          if [ -f .github/indexnow.json ]; then git add .github/indexnow.json; fi
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Update sitemap index"
+          git commit -m "Update sitemap index and IndexNow record"
           git pull --rebase
           git push

@@ -29,6 +29,34 @@
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(24,188,156,.6); } 100% { box-shadow: 0 0 0 .6em rgba(24,188,156,0); } }
     @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
   </style>
+  <!-- structured data: the name Google shows for the site, and its author. The pages of the other sites
+       (tutorials, apps) name the same person, with the same @id. Check it at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://sedzinfo.github.io/#website",
+        "url": "https://sedzinfo.github.io/",
+        "name": "sedzinfo",
+        "description": "Free R packages, Shiny apps and tutorials on statistics and psychometrics: IRT, adaptive testing, a Big Five personality test, and World Bank and Eurostat data explorers.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://sedzinfo.github.io/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://sedzinfo.github.io/#person",
+        "name": "Dimitrios Zacharatos",
+        "url": "https://sedzinfo.github.io/",
+        "sameAs": [
+          "https://github.com/sedzinfo",
+          "https://orcid.org/0000-0003-1789-8294"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-expand navbar-dark bg-primary">
