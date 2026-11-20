@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -30,21 +31,30 @@ HEADER = "<!-- Written by .github/scripts/build_sitemap.py (workflow: .github/wo
 
 
 def fetch(url, api=False):
-    """Return the body of url, or None on 404. Any other failure stops the script."""
+    """Return the body of url, or None on 404. A server error (5xx) or a failed connection is tried again
+    after 20 s and after 60 s more: GitHub Pages answers 503 at times, for a few seconds. Any other
+    failure, or the third, stops the script."""
     headers = {"User-Agent": f"{OWNER}-sitemap-bot"}
     if api:
         headers["Accept"] = "application/vnd.github+json"
         if os.environ.get("GITHUB_TOKEN"):
             headers["Authorization"] = f"Bearer {os.environ['GITHUB_TOKEN']}"
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=30) as response:
-            return response.read()
-    except urllib.error.HTTPError as error:
-        if error.code == 404:
-            return None
-        sys.exit(f"::error::{url} answered {error.code}; sitemap.xml was not changed")
-    except (urllib.error.URLError, TimeoutError) as error:
-        sys.exit(f"::error::{url} could not be reached ({error}); sitemap.xml was not changed")
+    for wait in (20, 60, None):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=30) as response:
+                return response.read()
+        except urllib.error.HTTPError as error:
+            if error.code == 404:
+                return None
+            if error.code < 500 or wait is None:
+                sys.exit(f"::error::{url} answered {error.code}; sitemap.xml was not changed")
+            problem = f"answered {error.code}"
+        except (urllib.error.URLError, TimeoutError) as error:
+            if wait is None:
+                sys.exit(f"::error::{url} could not be reached ({error}); sitemap.xml was not changed")
+            problem = f"could not be reached ({error})"
+        print(f"::warning::{url} {problem}; trying again in {wait} s")
+        time.sleep(wait)
 
 
 def lists_pages(url):

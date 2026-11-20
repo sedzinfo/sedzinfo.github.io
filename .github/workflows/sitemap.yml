@@ -38,8 +38,10 @@ jobs:
         run: python3 .github/scripts/build_sitemap.py
 
       # Needs the key file (<key>.txt at the root) live on the site; after the push that adds it,
-      # the step waits up to 5 minutes for GitHub Pages to deploy it.
+      # the step waits up to 5 minutes for GitHub Pages to deploy it. Runs even when the sitemap
+      # step failed: it then reads the sitemap.xml of the last run.
       - name: Tell IndexNow which pages changed
+        if: ${{ !cancelled() }}
         run: python3 .github/scripts/indexnow.py
 
       # Runs even when the IndexNow step failed, so a new sitemap still goes out: each script writes
