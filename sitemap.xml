@@ -2,6 +2,7 @@
 <!-- Written by .github/scripts/build_sitemap.py (workflow: .github/workflows/sitemap.yml). Do not edit by hand. -->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap><loc>https://sedzinfo.github.io/sitemap-home.xml</loc></sitemap>
+  <sitemap><loc>https://sedzinfo.github.io/covid/sitemap.xml</loc></sitemap>
   <sitemap><loc>https://sedzinfo.github.io/golemcat/sitemap.xml</loc></sitemap>
   <sitemap><loc>https://sedzinfo.github.io/golemcrypto/sitemap.xml</loc></sitemap>
   <sitemap><loc>https://sedzinfo.github.io/golemenviro/sitemap.xml</loc></sitemap>
